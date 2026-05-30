@@ -3,12 +3,11 @@
 
 
 typedef enum  {
-        CMD_QUIT,
-        CMD_CLEAR,
-        CMD_NOT_FOUND,
-} Command;
+        QUIT,
+        CLEAR,
+} COMMAND;
 
-Command parse_command(char input[]);
-int run_command(Command cmd);
+char **parse_command(char input[]);
+int run_command(char **args);
 
 #endif
