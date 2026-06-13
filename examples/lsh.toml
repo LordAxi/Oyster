@@ -1,2 +1,0 @@
-prompt = "{USER}@{HOSTNAME}$ "
-welcome_message = "Welcome to LSH(v{VERSION}), {USER}\n"

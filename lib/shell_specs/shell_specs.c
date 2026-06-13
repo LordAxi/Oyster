@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <sys/utsname.h>
 
 char *get_shell_spec(char *search) {
@@ -18,8 +19,11 @@ char *get_shell_spec(char *search) {
             return result;
         }
     }
-    if (strcmp(search, "VERSION") == 0) {
+    else if (strcmp(search, "VERSION") == 0) {
         return version;
+    }
+    else if (strcmp(search, "WORKING_DIR") == 0) {
+        return getcwd(NULL, 0);
     }
     return NULL;
 }

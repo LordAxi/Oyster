@@ -12,18 +12,29 @@
 char *remove_quotes(char *token, int len) {
     char *token_buffer = malloc(len +1);
     strncpy(token_buffer, token, len);
-    if ((token_buffer[0] == '\'' && token_buffer[len-1] == '\'') || (token_buffer[0] == '\"' && token_buffer[len-1] == '\"')) {
-        int i = 0, j = 0;
+    int n = 0;
+    for(int i = 0; i < len -1; i++) {
+        if ((token_buffer[i] == '\'' || token_buffer[i] == '\"') && i == 0) {
+            
+            for (int j = i +1; j < len; j++) {
+                token_buffer[j-1] = token_buffer[j];
+            }
+            n++;
+        }
+        else if ((token_buffer[i] == '\'' || token_buffer[i] == '\"') && token_buffer[i -1] != '\\') {
+            for (int j = i +1; j < len; j++) {
+                token_buffer[j-1] = token_buffer[j];
+            }
+            n++;
+        }
 
-        while (token_buffer[i] == '\'' || token_buffer[i] == '\"') i++;
 
-        while ((token_buffer[j++] = token_buffer[i++]));
-
-        token_buffer[len -2] = '\0';
     }
+    token_buffer[len -n] = '\0';
     return token_buffer;
 }
 char **parse_input(char *input) {
+    
     char **argv = malloc(sizeof(char*) * MAX_ARGS);
     int argc = 0;
 
@@ -77,24 +88,26 @@ char **parse_input(char *input) {
 char **parse_command(char input[]) {
     char **args = malloc(sizeof(char) * MAX_ARGS);
     args = parse_input(input);
+
+    // TODO optimize following
     if (strcmp(args[0], "quit") == 0) {
-        args[0] = "LSH";
+        args[0] = "OYSTER";
         args[1] = "quit";
     }
     else if (strcmp(args[0], "clear") == 0) {
-        args[0] = "LSH";
+        args[0] = "OYSTER";
         args[1] = "clear";
     }
     else if (strcmp(args[0], "cd") == 0) {
         args[2] = args[1];
-        args[0] = "LSH";
+        args[0] = "OYSTER";
         args[1] = "cd";
     }
     return args;      
 }
 
 int run_command(char **args) {
-    if (strcmp(args[0], "LSH") == 0) {
+    if (strcmp(args[0], "OYSTER") == 0) {
         // internal command
         char *available_commands[] = {"quit", "clear", "cd", NULL};
         

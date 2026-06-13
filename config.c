@@ -35,7 +35,7 @@ CONFIG get_config(void) {
     if (home == NULL) {
         error(ERROR, "Home folder could NOT be automatically identified", true);
     }
-    char *file = "/.config/lsh/lsh.toml";
+    char *file = "/.config/oyster/oyster.toml";
 
     char *file_path = malloc(strlen(home) + strlen(file) +1);
     sprintf(file_path, "%s%s", home, file);
@@ -98,10 +98,11 @@ CONFIG get_config(void) {
                 free(config_inc_vars);
 
             }
-        }
-        else {
-            error(WARNING, "Some of the config types do not match. Standart will be used", false);
-        }
+        }   
+        else { 
+            error(WARNING, "Some of the config types do not match. Standard will be used", false);
+		}
+        
     }
     
 

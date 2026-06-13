@@ -1,7 +1,7 @@
 ./build.sh
 
-sudo cp lsh /usr/bin/lsh
+sudo cp oyster /usr/bin/oyster
 
-mkdir ~/.config/lsh
+mkdir ~/.config/oyster
 
-cp examples/lsh.toml ~/.config/lsh/lsh.toml
+cp examples/oyster.toml ~/.config/oyster/oyster.toml

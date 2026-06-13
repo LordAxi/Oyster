@@ -29,11 +29,9 @@ int main(void) {
         
         char **args = parse_command(input);
 
-        //if (cmd == CMD_NOT_FOUND) {
-          //  printf("LSH: %s: Command does not exist.\n", input);
-        //}
+        
         int exit_code = run_command(args);
-
+        config = get_config();
         if (exit_code < 0) {
             running = false;
         }
