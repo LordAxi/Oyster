@@ -15,17 +15,18 @@ char *remove_quotes(char *token, int len) {
     int n = 0;
     for(int i = 0; i < len -1; i++) {
         if ((token_buffer[i] == '\'' || token_buffer[i] == '\"') && i == 0) {
-            
             for (int j = i +1; j < len; j++) {
                 token_buffer[j-1] = token_buffer[j];
             }
             n++;
+            token_buffer[len -n] = '\0';
         }
         else if ((token_buffer[i] == '\'' || token_buffer[i] == '\"') && token_buffer[i -1] != '\\') {
             for (int j = i +1; j < len; j++) {
                 token_buffer[j-1] = token_buffer[j];
             }
             n++;
+            token_buffer[len -n] = '\0';
         }
 
 

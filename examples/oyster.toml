@@ -1,2 +1,2 @@
-prompt = "{USER}@{HOSTNAME}~{WORKING_DIR}$ "
+prompt = "{USER}@{HOSTNAME}{WORKING_DIR}$ "
 welcome_message = "Welcome to Oyster(v{VERSION}), {USER}\n"
