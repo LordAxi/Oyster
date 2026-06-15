@@ -21,20 +21,31 @@ int main(void) {
         
 
         printf("%s", config.prompt);
-
+        
         fgets(input, 100, stdin);
 
         int parsed_size = strcspn(input, "\n");
-        input[parsed_size] = '\0';
-        
-        char **args = parse_command(input);
 
         
-        int exit_code = run_command(args);
-        config = get_config();
-        if (exit_code < 0) {
-            running = false;
+        input[parsed_size] = '\0';
+        if (parsed_size > 1) {
+            char **args = parse_command(input);
+
+        
+            int exit_code = run_command(args);
+            config = get_config();
+
+            if (exit_code < 0) {
+                running = false;
+            }
+            
         }
+        else {
+            error(WARNING, "Input empty", false);
+        }
+        
+        
+        
     }
     
 }

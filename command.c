@@ -74,13 +74,14 @@ char **parse_input(char *input) {
         int len = p - start;
 
         char *token = malloc(len + 1);
-        strncpy(token, remove_quotes(start, len), len);
+        char *token_buffer = remove_quotes(start, len);
+        strncpy(token, token_buffer, len);
 
+        free(token_buffer);
         
         token[len] = '\0';
 
         argv[argc++] = token;
-        
     }
     argv[argc] = NULL; 
     
@@ -137,6 +138,9 @@ int run_command(char **args) {
                 return 0;
                 break;
         }
+        for (int i = 0; args[i] != NULL; i++) {
+            free(args[i]);
+        }
         return 0;
     }
     else {
@@ -152,6 +156,17 @@ int run_command(char **args) {
         } 
         else {
             error(ERROR, args[0], true);
+        }
+    }
+
+    for (int i = 0; true; i++) {
+        if (i > 0){
+            if (args[i -1] != NULL) {
+                free(args[i]);
+            }
+            else {
+                break;
+            }
         }
     }
     return 0;
